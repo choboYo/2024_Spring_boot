@@ -60,7 +60,7 @@ public class UsrMemberController {
 	@ResponseBody
 	public ResultData doLogin(HttpSession session, String loginId, String loginPw) {
 		
-		if (session.getAttribute("loginedMemberId") != null) {
+		if(Util.isNull(String.valueOf(session.getAttribute("loginedMemberId"))) == false) {
 			return ResultData.from("F-L", "로그아웃 후 이용해주세요");
 		}
 		
@@ -90,7 +90,7 @@ public class UsrMemberController {
 	@ResponseBody
 	public ResultData doLogout(HttpSession session) {
 		
-		if (session.getAttribute("loginedMemberId") == null) {
+		if (Util.isNull(String.valueOf(session.getAttribute("loginedMemberId")))) {
 			return ResultData.from("F-L", "로그인 후 이용해주세요");
 		}
 		
