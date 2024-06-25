@@ -56,20 +56,18 @@ public class UsrArticleController {
 	}
 	
 	@GetMapping("/usr/article/detail")
-	public String showDetail(HttpSession session, int id, Model model) {
+	public String showDetail(HttpSession session, Model model, int id) {
 		
 		int loginedMemberId = 0;
 		
-		if(session.getAttribute("loginedMemberId") != null) {
-			
+		if (session.getAttribute("loginedMemberId") != null) {
 			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 		}
 		
-		Article foundArticle = articleService.forPrintArticle(id);
+		Article article = articleService.forPrintArticle(id);
 		
-		model.addAttribute("foundArticle", foundArticle);
-		model.addAttribute("loginedMemberId", loginedMemberId );
-		
+		model.addAttribute("article", article);
+		model.addAttribute("loginedMemberId", loginedMemberId);
 		
 		return "usr/article/detail";
 	}
@@ -95,20 +93,10 @@ public class UsrArticleController {
 	
 	@GetMapping("/usr/article/doDelete")
 	@ResponseBody
-	public ResultData doDelete(HttpSession session, int id) {
-		
-		Article foundArticle = articleService.getArticleById(id);
-		
-		if (foundArticle == null) {
-			return ResultData.from("F-1", String.format("%d번 게시물은 존재하지 않습니다", id));
-		}
-		
-		if (foundArticle.getMemberId() != (int) session.getAttribute("loginedMemberId")) {
-			return ResultData.from("F-A", "해당 게시물에 대한 권한이 없습니다");
-		}
+	public String doDelete(int id) {
 		
 		articleService.deleteArticle(id);
 		
-		return ResultData.from("S-1", String.format("%d번 게시물을 삭제했습니다", id));
+		return Util.jsReplace(String.format("%d번 게시물을 삭제했습니다", id), "list");
 	}
 }

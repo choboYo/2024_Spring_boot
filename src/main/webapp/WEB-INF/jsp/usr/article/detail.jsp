@@ -5,47 +5,41 @@
 <c:set var="pageTitle" value="ARTICLE DETAIL" />
 
 <%@ include file="../../common/head.jsp" %>
-<body>
-	<section class="mt-6 text-lg">
+	<section class="mt-8 text-lg">
 		<div class="container mx-auto px-3">
 			<div class="table-box-type">
 				<table>
-					<tbody>
-						<c:set var="article" value="${foundArticle}"/>
-						<tr>
-							<td>번호</td>
-							<td>${article.getId()}</td>
-						</tr>
-						<tr>
-							<td>작성일</td>
-							<td>${article.getRegDate().substring(2, 16)}</td>
-						</tr>
-						<tr>
-							<td>제목</td>
-							<td>${article.getTitle()}</td>
-						</tr>
-						<tr>
-							<td>내용</td>
-							<td>${article.getBody()}</td>
-						</tr>
-						<tr>
-							<td>작성자</td>
-							<td>${article.getWriterName()}</td>
-						</tr>
-					</tbody>
+					<tr>
+						<th>번호</th>
+						<td>${article.id }</td>
+					</tr>
+					<tr>
+						<th>작성일</th>
+						<td>${article.updateDate.substring(2, 16) }</td>
+					</tr>
+					<tr>
+						<th>작성자</th>
+						<td>${article.writerName }</td>
+					</tr>
+					<tr>
+						<th>제목</th>
+						<td>${article.title }</td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td>${article.body }</td>
+					</tr>
 				</table>
-				<div class="btn">
-					<button onclick="history.back();">뒤로가기</button>
-					
-					<c:if test="${loginedMemberId == foundArticle.memberId}">
-						<a href="modify?id=${foundArticle.id}">수정</a>
-						<a href="delete?id=${foundArticle.id}">삭제</a>
-					</c:if>
-				</div>
+			</div>
+			
+			<div class="btns mt-3 text-sm">
+				<button onclick="history.back();">뒤로가기</button>
+				
+				<c:if test="${loginedMemberId == article.memberId }">
+					<a href="modify?id=${article.id }">수정</a>
+					<a href="doDelete?id=${article.id }" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;">삭제</a>
+				</c:if>
 			</div>
 		</div>
 	</section>
-	
-	
-</body>
 <%@ include file="../../common/foot.jsp" %>
