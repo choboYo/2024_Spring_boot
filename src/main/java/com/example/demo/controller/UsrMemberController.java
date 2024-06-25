@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.MemberService;
 import com.example.demo.util.Util;
-import com.example.demo.vo.Article;
 import com.example.demo.vo.Member;
 import com.example.demo.vo.ResultData;
 
@@ -61,9 +60,7 @@ public class UsrMemberController {
 	@ResponseBody
 	public ResultData doLogin(HttpSession session, String loginId, String loginPw) {
 		
-		System.out.println(Util.isNull(String.valueOf(session.getAttribute("loginedMemberId"))));
-		
-		if(Util.isNull(String.valueOf(session.getAttribute("loginedMemberId"))) == false) {
+		if (session.getAttribute("loginedMemberId") != null) {
 			return ResultData.from("F-L", "로그아웃 후 이용해주세요");
 		}
 		
@@ -93,7 +90,7 @@ public class UsrMemberController {
 	@ResponseBody
 	public ResultData doLogout(HttpSession session) {
 		
-		if (Util.isNull(String.valueOf(session.getAttribute("loginedMemberId")))) {
+		if (session.getAttribute("loginedMemberId") == null) {
 			return ResultData.from("F-L", "로그인 후 이용해주세요");
 		}
 		
@@ -101,22 +98,4 @@ public class UsrMemberController {
 		
 		return ResultData.from("S-1", "정상적으로 로그아웃 되었습니다");
 	}
-
-	@GetMapping("/usr/member/changePw")
-	@ResponseBody
-	public ResultData changePw(HttpSession session, String loginPw, String loginPwChk) {
-		
-		if (Util.isNull(String.valueOf(session.getAttribute("loginedMemberId")))) {
-			return ResultData.from("F-L", "로그인 후 이용해주세요");
-		}
-		
-		if(loginPw.equals(loginPwChk) == false) {
-			return ResultData.from("F-5", "비밀번호 입력을 올바르게 해 주세요.");
-		}
-		
-		memberService.modifyMember((int) session.getAttribute("loginedMemberId"), loginPw);
-		
-		return ResultData.from("S-2", "비밀번호가 변경되었습니다.");
-	}
-	
 }
