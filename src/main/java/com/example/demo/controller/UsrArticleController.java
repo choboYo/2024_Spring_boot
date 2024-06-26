@@ -70,23 +70,20 @@ public class UsrArticleController {
 		return "usr/article/detail";
 	}
 	
+	@GetMapping("/usr/article/modify")
+	public String Modify() {
+		return "usr/article/modify";
+	}
+	
 	@GetMapping("/usr/article/doModify")
 	@ResponseBody
-	public ResultData doModify(HttpSession session, int id, String title, String body) {
+	public String doModify(HttpSession session, int id, String title, String body) {
 		
-		Article foundArticle = articleService.getArticleById(id);
-		
-		if (foundArticle == null) {
-			return ResultData.from("F-1", String.format("%d번 게시물은 존재하지 않습니다", id));
-		}
-		
-		if (foundArticle.getMemberId() != (int) session.getAttribute("loginedMemberId")) {
-			return ResultData.from("F-A", "해당 게시물에 대한 권한이 없습니다");
-		}
+		Article article = articleService.getArticleById(id);
 		
 		articleService.modifyArticle(id, title, body);
 		
-		return ResultData.from("S-1", String.format("%d번 게시물을 수정했습니다", id));
+		return Util.jsReplace(String.format("%d번 게시물을 수정했습니다", id), "list");
 	}
 	
 	@GetMapping("/usr/article/doDelete")
