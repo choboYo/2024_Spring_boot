@@ -79,6 +79,7 @@ public class UsrMemberController {
 		
 		rq.login(member);
 		
+		
 		return Util.jsReplace(String.format("%s님 환영합니다~", member.getNickname()), "/");
 	}
 	

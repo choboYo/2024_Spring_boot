@@ -63,12 +63,20 @@
 				</table>
 			</div>
 			
-			<c:if test="${rq.getLoginedMemberId() != 0 }">
-				<div class="flex justify-end mt-2 mr-3">
-					<a class="btn btn-active btn-sm" href="write">글쓰기</a>
-				</div>
-			</c:if>
+			<c:choose>
+				<c:when test="${rq.getLoginedMemberId() != 0 && param.boardId == 2}">
+						<div class="flex justify-end mt-2 mr-3">
+							<a class="btn btn-active btn-sm" href="write">글쓰기</a>
+						</div>
+				</c:when>
+				<%-- <c:when test="${rq.getLoginedMemberId() != 0}">
+						<div class="flex justify-end mt-2 mr-3">
+							<a class="btn btn-active btn-sm" href="write">글쓰기</a>
+						</div>
+				</c:when>  --%>
+			</c:choose>
 			
+			<!-- paging 처리  -->
 			<div class="mt-3 flex justify-center">
 				<div class="join">
 				

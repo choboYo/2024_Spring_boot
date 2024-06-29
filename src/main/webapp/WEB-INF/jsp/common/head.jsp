@@ -25,12 +25,30 @@
 			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/"><span>HOME</span></a></li>
 			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=1"><span>NOTICE</span></a></li>
 			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=2"><span>FREE</span></a></li>
-			<c:if test="${rq.getLoginedMemberId() == 0 }">
-				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>LOGIN</span></a></li>
-			</c:if>
-			<c:if test="${rq.getLoginedMemberId() != 0 }">
-				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/doLogout"><span>LOGOUT</span></a></li>
-			</c:if>
+				<c:if test="${rq.getLoginedMemberId() == 0 }">
+					<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>LOGIN</span></a></li>
+				</c:if>
+				
+		  <c:if test="${rq.getLoginedMemberId() != 0 }">
+			<div class="dropdown dropdown-end">
+		      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar mt-4 ml-5">
+		        <div class="w-10 rounded-full">
+		          <img 
+		            alt="Tailwind CSS Navbar component"
+		            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+		        </div>
+		      </div>
+			     <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+		        	<li>
+		        		<a class="justify-between">Profile
+		        		<span class="badge">New</span>
+		       			 </a>
+		            </li>
+		       		<li><a>Settings</a></li>
+						<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/doLogout"><span>LOGOUT</span></a></li>
+			    </ul>
+		      </div>
+		  	</c:if>		
 		</ul>
 	</div>
 	
