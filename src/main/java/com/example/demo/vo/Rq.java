@@ -37,10 +37,8 @@ public class Rq {
 		this.loginedMemberId = loginedMemberId;
 	
 		req.setAttribute("rq", this);
-	
 	}
-	
-	
+
 	public void jsPrintReplace(String msg, String uri) {
 		resp.setContentType("text/html; charset=UTF-8;");
 		
@@ -61,5 +59,4 @@ public class Rq {
 
 	public void init() {
 	}
-
 }

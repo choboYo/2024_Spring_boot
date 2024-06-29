@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -91,4 +92,16 @@ public class UsrMemberController {
 		
 		return Util.jsReplace("정상적으로 로그아웃 되었습니다", "/");
 	}
+
+	@GetMapping("/usr/member/profile")
+	public String profile(Model model) {
+		int id = (int) rq.getLoginedMemberId();
+	
+		Member member = memberService.getMemberById(id);
+		
+		model.addAttribute("member", member);
+		
+		return "usr/member/profile";
+	}
+
 }
