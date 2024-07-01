@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.vo.ResultData;
+
 @Controller
 public class UsrHomeController {
 	
@@ -14,7 +16,12 @@ public class UsrHomeController {
 	
 	@GetMapping("/")
 	public String showRoot() {
-		// redirect를 통해서 http에서 https로 옮기는 방식을 적용할때 필요한 작업이다.
 		return "redirect:/usr/home/main";
+	}
+	
+	@GetMapping("/usr/home/test")
+	@ResponseBody
+	public ResultData<String> test(String key1, String key2) {
+		return ResultData.from("코드", key1 + key2);
 	}
 }
