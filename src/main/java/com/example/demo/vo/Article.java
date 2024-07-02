@@ -16,4 +16,5 @@ public class Article {
 	private String body;
 	private String writerName;
 	private int views;
+	private int likePoint;
 }

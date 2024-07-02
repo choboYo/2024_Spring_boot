@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LikePoint {
-	int id;
-	int memberId;
-	String relTypeCode;
-	int relId;
-	int point;
+	private int id;
+	private int memberId;
+	private String relTypeCode;
+	private int relId;
+	private int point;
 }
