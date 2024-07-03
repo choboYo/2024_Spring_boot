@@ -17,9 +17,8 @@ public class Article {
 	private String writerName;
 	private int views;
 	private int likePoint;
-
-	public void Bodyspace() {
-		this.body.replaceAll("/n", body);
-		
+	
+	public String getForPrintBody() {
+		return this.body.replaceAll("\n", "<br />");
 	}
 }
