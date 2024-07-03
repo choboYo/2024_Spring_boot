@@ -6,30 +6,61 @@
 
 <%@ include file="../../common/head.jsp" %>
 
-	<script>
-		const writeForm_onSubmit = function(form) {
-			form.title.value = form.title.value.trim();
-			form.body.value = form.body.value.trim();
-			
-			if (form.title.value.length == 0) {
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+<link rel="stylesheet" href="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.css" />
+<link rel="stylesheet" href="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.css" />
+<script src="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.js"></script>
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+<script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
+
+	<script>	
+		const { Editor } = toastui;
+		const { colorSyntax } = Editor.plugin;
+
+		$(function(){
+		  $('.toast-ui-editor').each(function(index, item) {
+		    const items = $(item);
+
+		    const editor = new Editor({
+		      el: item,
+		      height: '300px',
+		      initialEditType: 'markdown',
+		      previewStyle: 'tab',
+		      plugins: [colorSyntax]
+		    });
+
+		    items.data('data-toast-editor', editor);
+		  });
+		});
+
+		function submitForm(form){
+		  const editorData = $(form).find('.toast-ui-editor').data('data-toast-editor');
+		  const markdown = editorData.getMarkdown().trim();
+		  form.title.value = form.title.value.trim();
+		  
+		  if (form.title.value.length == 0) {
 				alert('제목을 입력해주세요');
 				form.title.focus();
 				return;
 			}
-			
-			if (form.body.value.length == 0) {
-				alert('내용을 입력해주세요');
-				form.body.focus();
-				return;
-			}
-			
-			form.submit();
+		  
+		  if(markdown.length == 0){
+		    alert('내용을 입력해주세요');
+		    editorData.focus();
+		    return;
+		  }
+
+		  form.body.value = markdown;
+		  
+		  form.submit();
 		}
+
 	</script>
 
 	<section class="mt-8 text-lg">
 		<div class="container mx-auto px-3">
-			<form action="doWrite" method="post" onsubmit="writeForm_onSubmit(this); return false;">
+			<form action="doWrite" method="post" onsubmit="submitForm(this); return false;">
 				<div class="w-9/12 mx-auto">
 					<table class="table table-lg">
 						<tr>
@@ -58,7 +89,8 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea class="textarea textarea-bordered textarea-lg w-full max-w-xs" name="body"></textarea></td>
+							  <td><input type="text" name="body" /></td>
+							  <td><div class="toast-ui-editor"></div></td>
 						</tr>
 						<tr>
 							<td colspan="2">
