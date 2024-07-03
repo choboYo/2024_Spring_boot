@@ -18,4 +18,6 @@ public class Member {
 	private String cellphoneNum;
 	private String email;
 	private String authLevel;
+	private int delDate;
+	private int delStatus;
 }
