@@ -42,8 +42,20 @@ public interface MemberDao {
 
 	@Update("""
 			UPDATE `member`
-				SET loginPw = #{loginPw}
-				WHERE id = #{id}
+				SET updateDate = NOW()
+					, `name` = #{name}
+					, nickname = #{nickname}
+					, cellphoneNum = #{cellphoneNum}
+					, email = #{email}
+				WHERE id = #{loginedMemberId}
 			""")
-	public void modifyMember(int id, String loginPw);
+	public void memberModify(int loginedMemberId, String name, String nickname, String cellphoneNum, String email);
+
+	@Update("""
+			UPDATE `member`
+				SET updateDate = NOW()
+					, loginPw = #{loginPw}
+				WHERE id = #{loginedMemberId}
+			""")
+	public void doPasswordModify(int loginedMemberId, String loginPw);
 }
