@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -102,5 +103,15 @@ public class UsrMemberController {
 		}
 		
 		return member.getNickname();
+	}
+
+	@GetMapping("/usr/member/profile")
+	public String profile(Model model) {
+		
+		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+		
+		model.addAttribute("member", member);
+		return "usr/member/profile";
+
 	}
 }
