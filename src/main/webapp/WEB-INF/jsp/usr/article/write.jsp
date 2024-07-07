@@ -40,7 +40,7 @@
 						<tr>
 							<th>내용</th>
 							<td>
-								<div class="toast-ui-editor">
+								<div data-theme="light" class="toast-ui-editor">
 									<script type="text/x-template"></script>
 								</div>
 							</td>

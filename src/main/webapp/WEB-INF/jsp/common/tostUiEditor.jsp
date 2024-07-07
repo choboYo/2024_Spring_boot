@@ -19,7 +19,7 @@
 	
 	    const editor = new Editor({
 	      el: item,
-	      height: '600px',
+	      height: '500px',
 	      initialValue: initialValue,
 	      initialEditType: 'markdown',
 	      previewStyle: 'tab',
@@ -29,6 +29,7 @@
 	    items.data('data-toast-editor', editor);
 	  });
 	});
+	
 	
 	function submitForm(form){
 		form.title.value = form.title.value.trim();
