@@ -16,8 +16,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <!-- 공통 css -->
 <link rel="stylesheet" href="/resource/common.css" />
-<!-- 테마 체인지 -->
-<script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"></script>
 <script src="/resource/common.js" defer="defer"></script>
 </head>
 <body>
@@ -29,17 +27,13 @@
 			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=1"><span>NOTICE</span></a></li>
 			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=2"><span>FREE</span></a></li>
 			<c:if test="${rq.getLoginedMemberId() == 0 }">
+				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/join"><span>JOIN</span></a></li>
 				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>LOGIN</span></a></li>
 			</c:if>
 			<c:if test="${rq.getLoginedMemberId() != 0 }">
 				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/myPage"><span>MYPAGE</span></a></li>
 				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/doLogout"><span>LOGOUT</span></a></li>
 			</c:if>
-			<li class="h-full px-3 flex items-center">
-				<button data-toggle-theme="dark,light" data-act-class="ACTIVECLASS">
-					<input type="checkbox" class="toggle border-blue-500 bg-blue-500 [--tglbg:yellow] hover:bg-blue-700" checked="checked" />
-	  			</button>
-			</li>
 		</ul>
 	</div>
 	
