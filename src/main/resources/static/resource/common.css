@@ -6,16 +6,14 @@
     src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.ttf) format("truetype");
 }
 
-html > body {
+html > body, .ProseMirror > div, .toastui-editor-contents > div {
 	font-family: 'NanumSquareNeo';
 	text-underline-position: under;
 }
 
-.ProseMirror > div, .toastui-editor-contents > p {
-	font-size: 1.5rem;
-	
-	}
-
+.ProseMirror > div, .toastui-editor-contents > div {
+	font-size: 1.25rem;
+}
 
 .border-bottom-line {
 	border-bottom: 1px solid #cdd0d4;
@@ -34,40 +32,23 @@ html > body {
 	width: 50%;
 }
 
-
-#modal{
-	display : none;
-	z-index : 1;
-	background-color: rgba(0,0,0,.3);
-	position:fixed;
-	left:0;
+.modalLayer-bg {
+	position: absolute;
 	top: 0;
-	width:100%;
-	height:100%;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, .5);
 }
 
-#modal>#content{
-	width:400px;
-	margin:450px auto;
-	padding:20px;
-	position: relative;
-	background-color:#fff;
+.modalLayer {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	background-color: #afafaf;
+	color: white;
+	width: 500px;
+	height: 500px;
+	border: 5px solid red;
 }
-
-#modal .close{
-    position:absolute;
-    top:4px;
-    right:4px;	
-    font-size:20px;
-    border:0;
-    background-color: #fff;
-} 
-#modal .close:hover,
-#modal .close:focus {
-    color : #000;
-    text-decoration: none;
-    cursor :pointer;
-}
-
-
-
