@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.css" />
 <link rel="stylesheet" href="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.css" />
+<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/theme/toastui-editor-dark.min.css" />
 <script src="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.js"></script>
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
@@ -17,19 +18,21 @@
 	    const initialValueEl = items.find(' > script');
 	    const initialValue = initialValueEl.length == 0 ? '' : initialValueEl.html().trim();
 	
+	    const theme = localStorage.getItem("theme") ?? "light";
+	    
 	    const editor = new Editor({
 	      el: item,
-	      height: '500px',
+	      height: '600px',
 	      initialValue: initialValue,
 	      initialEditType: 'markdown',
 	      previewStyle: 'tab',
+	      theme: theme,
 	      plugins: [colorSyntax]
 	    });
 	
 	    items.data('data-toast-editor', editor);
 	  });
 	});
-	
 	
 	function submitForm(form){
 		form.title.value = form.title.value.trim();
